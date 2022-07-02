@@ -40,7 +40,7 @@ try{
     {
       path: req.body.path,
       height:req.body.height,
-      category: [req.body.category]
+      category: req.body.category
     }
   )
   await  new_exercice.save();
@@ -69,14 +69,38 @@ app.get("/deleteExercice", (req,res)=>{
   res.redirect("/");
 });
 
-let ExamData ={
+/*const cursor = db.collection('inventory').find({
+  tags: 'red'
+});
+*/
+//Get 
+app.get('/exercicesProba', async (req, res) => {
+  try{
+  await  Exercice.find({ category: 'proba' }).then(data => {res.send(data)})
+  
+  }
+  catch(err)
+  {
+    console.log(err);
+  }
+});
+
+
+
+
+
+
+// pdf service route
+app.get('/',async (req, res, next) => {
+  
+  let testExercicesData  = await Exercice.find({});
+  let ExamData ={
   universityName:"Institus superieur des arts de multimedias",
   logo:"https://i.ibb.co/PM1VfGb/logo.jpg",
   date:'A.U. 2021-2022.',
-  departement:"Departement informatique"
+  departement:"Departement informatique",
+  EXs:testExercicesData
 }
-
-app.get('/', (req, res, next) => {
   const stream = res.writeHead(200, {
     'Content-Type': 'application/pdf',
     'Content-Disposition': `attachment;filename=invoice.pdf`,

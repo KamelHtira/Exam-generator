@@ -2,33 +2,6 @@ const PDFDocument = require('pdfkit');
 const fs = require('fs');
 const axios = require('axios').default;
 
-var T=[{
-  path:'https://i.ibb.co/n8fjrgL/EX1.png',
-  height: 110,
-  category:["proba"]
-},
-{
-  path:'https://i.ibb.co/CMfsWwG/EX2.png',
-  height: 90,
-  category:["proba"]
-},
-{
-  path:'https://i.ibb.co/CQnx4gX/EX3.png',
-  height: 120,
-  category:["proba"]
-},
-{
-  path:'https://i.ibb.co/jWGbvYR/EX4.png',
-  height: 190,
-  category:["proba"]
-},
-{
-  path:'https://i.ibb.co/y8QSMFJ/EX5.png',
-  height: 190,
-  category:["proba"]
-}
-]
-
 const   ran=(max,min)=>{
   return Math.floor(Math.random() * (max - min ) + min)
 }
@@ -37,7 +10,8 @@ const   ran=(max,min)=>{
 const  buildPDF=async (dataCallback, endCallback,ExamData)=> {
   
 
-  
+  console.log(ExamData.EXs)
+  let T = ExamData.EXs
   const Exam = new PDFDocument({ bufferPages: true, font: 'Courier' });
   Exam.fontSize(12).font('Helvetica').fillColor('#282828')
   Exam.text(ExamData.universityName,50,50,{align:"center"})
@@ -50,7 +24,6 @@ const  buildPDF=async (dataCallback, endCallback,ExamData)=> {
   Exam.text(' '.repeat(200),{align:"center",underline: true})
   Exam.fontSize(9)
   Exam.text(ExamData.date+'\n'+ExamData.departement ,460,45,{align:"right",width:"120"})
-
 
 
 

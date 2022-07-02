@@ -11,7 +11,7 @@ const exerciceSchema = mongoose.Schema(
             required:true
         },
         category: {
-            type:Array,
+            type:[],
             required:true
         }
     }
