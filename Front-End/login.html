@@ -1,0 +1,59 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" id="form">
+        <input type="text" placeholder="username" id="username"> <br>
+        <input type="text" placeholder="password" id="password"><br>
+
+        <button type="submit">login</button>
+    </form>
+</body>
+<script>
+
+    
+    const form = document.getElementById('form')
+    
+    form.addEventListener('submit',addExerciceData)
+    
+    async function addExerciceData(event){
+    
+        event.preventDefault()
+        const username = document.getElementById('username').value
+        const password = document.getElementById('password').value
+    
+        
+        const body =JSON.stringify(
+                {
+    
+                "username":username,
+                "password":password
+            }
+        )
+    
+        const data = await fetch('/auth/api/login',{
+            method:'POST',
+            headers:{'content-Type':'application/json'},
+            body:body
+            
+        }).then((res)=> res.json())
+        alert(data.message)
+        console.log(data.data)
+        if(data.status=="ok")
+        {
+        window.location.replace('/router/addExerciceUI')
+        }
+    
+        
+    
+    
+    }
+    
+    
+    
+    </script>
+</html>

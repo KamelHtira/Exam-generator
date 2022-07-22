@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" id="form">
+        <input type="text" placeholder="id" id="id"> <br>
+
+        <button type="submit">delete</button>
+    </form>
+</body>
+<script>
+
+    
+const form = document.getElementById('form')
+
+form.addEventListener('submit',deleteExercice)
+ 
+async function deleteExercice(event){
+
+    event.preventDefault()
+    const id = document.getElementById('id').value
+
+    
+    const body =JSON.stringify(
+            {
+            "id":id
+        }
+        )
+        console.log(body)
+        const data = await fetch('/router/Exercice',{
+        method:'Delete',
+        headers:{'content-Type':'application/json'},
+        body:body
+        
+    }).then((res)=> res.json())
+    console.log(data)
+ 
+
+
+}
+
+
+
+</script>
+</html>
