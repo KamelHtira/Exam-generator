@@ -1,16 +1,13 @@
 // Libraries
 const express = require('express');
 const mongoose = require('mongoose');
-const Exercice = require('./models/exercices');
-const pdfService = require('./services/pdf-service');
 const app = express();
 const cookies = require('cookie-parser')
 const router=require('./routes/Routes')
 const authRouter=require('./routes/AuthRoutes')
+
 app.use(cookies())
-
 app.use(express.json());
-
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/router", router);

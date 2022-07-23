@@ -3,6 +3,7 @@ const Users = require('../models/Users');
 const bcrypt=require('bcryptjs')
 const jwt=require('jsonwebtoken')
 const dotenv = require('dotenv');
+const {verifyJWT,createJwtToken}= require('../functions/functions')
 dotenv.config();
 JWT_SECRET_KEY=process.env.JWT_SECRET_KEY
 
@@ -22,21 +23,32 @@ async function verifyLogin (req, res){
       console.log('password match hash')
      
      
-      // creating token
-      const token = jwt.sign({
+      // creating tokens
+      const accessToken =await createJwtToken({
         id:a._id,
         username:a.username
-      },
-      JWT_SECRET_KEY
-      )
-       res.cookie('token',token,{maxAge:1000*60*15,
+      },'5s')
+
+      const refreshToken =await createJwtToken({
+        id:a._id,
+        username:a.username
+      },'1d')
+      
+       res.cookie('accessToken',accessToken,{maxAge:1000*60*15,
         httpOnly: true,
         domain:'localhost',
         path: '/',
         sameSite: 'strict',
         secure: false,})
+      res.cookie('refreshToken',refreshToken,{maxAge:1000*60*60*24,
+        httpOnly: true,
+        domain:'localhost',
+        path: '/',
+        sameSite: 'strict',
+        secure: false,})
+
       
-      return res.json({status: "ok",message: "welcome broo !  ",data:token})
+      return res.json({status: "ok",message: "welcome broo !  ",data:{accessToken,refreshToken}})
     }
   
     return res.json({status: "error",message: "password does not match"})
@@ -47,4 +59,6 @@ async function verifyLogin (req, res){
     }
   }
   
+
+
   module.exports = { verifyLogin }

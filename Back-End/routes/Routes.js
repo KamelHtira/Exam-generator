@@ -7,19 +7,19 @@ const {middlewareYes  }=require('../middleware')
 
 router.use(express.json())
 
-router.get('/Exercices', middlewareYes,getAllExercices);
+router.get('/Exercices', middlewareYes, getAllExercices);
 
-router.get('/ExercicesByCategory', middlewareYes,getExercicesByCategory);
+router.get('/ExercicesByCategory', middlewareYes, getExercicesByCategory);
 
-router.post('/Exercice', middlewareYes,addExercice);
+router.post('/Exercice', middlewareYes, addExercice);
 
-router.get('/addExerciceUI', middlewareYes,addExercicePage);
+router.get('/addExerciceUI', middlewareYes, addExercicePage);
 
-router.delete('/Exercice', middlewareYes,deleteExercice);
+router.delete('/Exercice', middlewareYes, deleteExercice);
 
-router.get('/deleteExerciceUI', middlewareYes,deleteExercicePage);
+router.get('/deleteExerciceUI', middlewareYes, deleteExercicePage);
 
-router.get('/generateExam', middlewareYes,generateExam);
+router.get('/generateExam', middlewareYes, generateExam);
 
 router.post('/User',addNewUser);
 
