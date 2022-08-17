@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Raleway'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+   <style>
+    /* Google Font Link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins" , sans-serif;
+}
+.sidebar{
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 78px;
+  background: #11101D;
+  padding: 6px 14px;
+  z-index: 99;
+  transition: all 0.5s ease;
+  overflow-y: scroll;
+  
+  scrollbar-color: #313144 white ;
+  overflow-x: hidden;
+}
+*{
+  scrollbar-width: thin;
+}
+
+.sidebar.open{
+  width:350px;
+}
+.sidebar .logo-details{
+  height: 60px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.sidebar .logo-details .icon{
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+.sidebar .logo-details .logo_name{
+  color: #fff;
+  font-size: 17px;
+  font-weight: 600;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+.sidebar.open .logo-details .icon,
+.sidebar.open .logo-details .logo_name{
+  opacity: 1;
+}
+.sidebar .logo-details #btn{
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  font-size: 22px;
+  transition: all 0.4s ease;
+  font-size: 23px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+.sidebar.open .logo-details #btn{
+  text-align: right;
+}
+.sidebar i{
+  color: #fff;
+  height: 60px;
+  min-width: 50px;
+  font-size: 28px;
+  text-align: center;
+  line-height: 60px;
+}
+.sidebar .nav-list{
+  margin-top: 20px;
+  height: 100%;
+}
+.sidebar li{
+  position: relative;
+  margin: 8px 0;
+  list-style: none;
+}
+.sidebar .optionsContainer li{
+
+
+
+}
+
+.sidebar li .tooltip{
+  position: absolute;
+  top: -20px;
+  left: calc(100% + 15px);
+  z-index: 3;
+  background: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 400;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: 0s;
+}
+.sidebar li:hover .tooltip{
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 0.4s ease;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.sidebar.open li .tooltip{
+  display: none;
+}
+.sidebar input{
+  font-size: 15px;
+  color: #FFF;
+  font-weight: 400;
+  outline: none;
+  height: 50px;
+  width: 100%;
+  width: 50px;
+  border: none;
+  border-radius: 12px;
+  transition: all 0.5s ease;
+  background: #1d1b31;
+}
+.sidebar.open input{
+  padding: 0 20px 0 50px;
+  width: 100%;
+}
+.sidebar .bx-search{
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  font-size: 22px;
+  background: #1d1b31;
+  color: #FFF;
+}
+.sidebar.open .bx-search:hover{
+  background: #1d1b31;
+  color: #FFF;
+}
+.sidebar .bx-search:hover{
+  background: #FFF;
+  color: #11101d;
+}
+.sidebar li a{
+  cursor: default;
+  border-radius:12px ;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  background: #11101D;
+}
+
+.sidebar li a .links_name{
+  color: #fff;
+  font-size: 17px;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+}
+.sidebar.open li a .links_name{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sidebar li i{
+  height: 50px;
+  line-height: 50px;
+  font-size: 18px;
+  border-radius: 12px;
+}
+.sidebar li.profile{
+  position: fixed;
+  height: 60px;
+  width: 78px;
+  left: 0;
+  bottom: -8px;
+  padding: 10px 14px;
+  background: #1d1b31;
+  transition: all 0.5s ease;
+  overflow: hidden;
+}
+.sidebar.open li.profile{
+  width: 350px;
+}
+.sidebar li .profile-details{
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.sidebar li img{
+  height: 45px;
+  width: 45px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 10px;
+}
+.sidebar li.profile .name,
+.sidebar li.profile .job{
+  font-size: 15px;
+  font-weight: 400;
+  color: #fff;
+  white-space: nowrap;
+}
+.sidebar li.profile .job{
+  font-size: 12px;
+}
+.sidebar .profile #log_out{
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background: #1d1b31;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 0px;
+  transition: all 0.5s ease;
+}
+.sidebar.open .profile #log_out{
+  width: 50px;
+  background: none;
+}
+.home-section{
+  position: relative;
+  background: #E4E9F7;
+  min-height: 100vh;
+  top: 0;
+  left: 78px;
+  width: calc(100% - 78px);
+  transition: all 0.5s ease;
+  z-index: 2;
+}
+.sidebar.open ~ .home-section{
+  left: 350px;
+  width: calc(100% - 350px);
+}
+.home-section .text{
+  display: inline-block;
+  color: #11101d;
+  font-size: 25px;
+  font-weight: 500;
+  margin: 18px
+}
+@media (max-width: 420px) {
+  .sidebar li .tooltip{
+    display: none;
+  }
+}
+
+   </style>
+
+<!-- ---------------------------------------------------------------------------------------------------------    -->
+   <style>
+/* CSS Document * Varun Dewan 2019 */
+
+
+
+
+
+
+
+
+.drop {
+  position: relative;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.drop.open {
+  z-index: 100;
+}
+.drop.open .drop-screen {
+  z-index: 100;
+  display: block;
+}
+.drop.open .drop-options {
+  z-index: 200;
+  max-height: 200px;
+}
+.drop.open .drop-display {
+  z-index: 200;
+  border-color: #465;
+}
+.drop select {
+  display: none;
+}
+.drop .drop-screen {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  top: 0px;
+  left: 0px;
+  opacity: 0;
+  display: none;
+  z-index: 1;
+}
+
+.link {
+  text-align: center;
+  margin: 20px 0px;
+  color:#8CACD7;
+}
+
+
+.drop .drop-display {
+  border-radius: 3px;
+  position: relative;
+  padding: 5px;
+  width: 100%;
+  background: #FFF;
+  z-index: 1;
+  margin: 0px;
+  font-size: 12px;
+  min-height: 44.8px;
+
+  
+}
+.drop .drop-display:hover:after {
+  opacity: 0.75;
+}
+.drop .drop-display:after {
+  font-family: 'Material Icons';
+  content: "\e5c6";
+  position: absolute;
+  right: 3px;
+  top: 7px;
+  font-size: 24px;
+  color: #444;
+}
+.drop .drop-display .item {
+  border-radius: 10px;
+  position: relative;
+  display: inline-block;
+  border: 2px solid #333;
+  margin-right: 6px;
+  padding: 0px 25px 0px 10px;
+  overflow: hidden;
+  height: 30px;
+
+  line-height: 27px;
+}
+.drop .drop-display .item .btnclose {
+  color: #444;
+  position: absolute;
+  font-size: 16px;
+  right: -13px;
+  top: -12px;
+  cursor: pointer;
+}
+.drop .drop-display .item .btnclose:hover {
+  opacity: 0.75;
+}
+.drop .drop-display .item.remove {
+  -webkit-animation: removeSelected 0.2s, hide 1s infinite;
+          animation: removeSelected 0.2s, hide 1s infinite;
+  -webkit-animation-delay: 0s, 0.2s;
+          animation-delay: 0s, 0.2s;
+}
+.drop .drop-display .item.add {
+  -webkit-animation: addSelected 0.2s;
+          animation: addSelected 0.2s;
+}
+.drop .drop-display .item.hide {
+  display: none;
+}
+.drop .drop-options {
+  background: #444;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  position: absolute;
+  width: 100%;
+  max-height: 0px;
+  overflow-y: auto;
+  transition: all 0.25s linear;
+  z-index: 1;
+}
+.drop .drop-options a {
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  padding: 0px 20px;
+  color: white;
+  position: relative;
+  max-height: 40px;
+  overflow: hidden;
+  border-radius: 0;
+  background-color: rgba(0, 0, 63, 0.414);
+}
+.drop .drop-options a:hover {
+  background: rgb(174, 187, 219);
+  cursor: pointer;
+}
+.drop .drop-options a.remove {
+  -webkit-animation: removeOption 0.2s;
+          animation: removeOption 0.2s;
+  max-height: 0px;
+}
+.drop .drop-options a.add {
+  -webkit-animation: addOption 0.2s;
+          animation: addOption 0.2s;
+}
+.drop .drop-options a.hide {
+  display: none;
+}
+
+@-webkit-keyframes pop {
+  from {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes pop {
+  from {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+@-webkit-keyframes removeOption {
+  from {
+    max-height: 40px;
+  }
+  to {
+    max-height: 0px;
+  }
+}
+@keyframes removeOption {
+  from {
+    max-height: 40px;
+  }
+  to {
+    max-height: 0px;
+  }
+}
+@-webkit-keyframes addOption {
+  from {
+    max-height: 0px;
+  }
+  to {
+    max-height: 40px;
+  }
+}
+@keyframes addOption {
+  from {
+    max-height: 0px;
+  }
+  to {
+    max-height: 40px;
+  }
+}
+@-webkit-keyframes removeSelected {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+}
+@keyframes removeSelected {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+}
+@-webkit-keyframes addSelected {
+  from {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+@keyframes addSelected {
+  from {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+@-webkit-keyframes hide {
+  from, to {
+    max-height: 0px;
+    max-width: 0px;
+    padding: 0px;
+    margin: 0px;
+    border-width: 0px;
+  }
+}
+@keyframes hide {
+  from, to {
+    max-height: 0px;
+    max-width: 0px;
+    padding: 0px;
+    margin: 0px;
+    border-width: 0px;
+  }
+}
+
+   </style>
+   <style>
+    /* kamel css */
+    .selectCourses{
+      margin-top: 10px;
+      display: none;
+  
+      width: 100%;
+    }
+    .examContainer{
+      height: 100vh;
+      width: 100%;
+      margin: auto;
+    }
+   </style>
+  <style>
+
+.select {
+  margin: auto;
+  color: white;
+  display:flex;
+  flex-direction: column;
+  position:relative;
+  width:50%;
+  font-size: 16px;
+  height: 40px;
+}
+.sidebar .option  i{
+  font-size: 15px;
+}
+.option {
+  height: 40px;
+  padding:0 30px 0 10px;
+  min-height:40px;
+  display:flex;
+  align-items:center;
+  background:#333;
+  border-top:#222 solid 1px;
+  position:absolute;
+  top:0;
+  width: 100%;
+  pointer-events:none;
+  order:2;
+  z-index:1;
+  transition: .2s ease-in-out;
+  box-sizing:border-box;
+  overflow:hidden;
+  white-space:nowrap;
+  border-radius: 12px;
+}
+
+.option:hover {
+  opacity: 0.8;
+}
+
+.select:focus .option {
+  position:relative;
+  pointer-events:all;
+}
+
+input {
+  opacity:0;
+  position:absolute;
+  left:-99999px;
+}
+
+input:checked + label {
+  order: 1;
+  z-index:2;
+  background:#666;
+  border-top:none;
+  position:relative;
+}
+
+input:checked + label:after {
+  content:'';
+  width: 0; 
+	height: 0; 
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-top: 5px solid white;
+  position:absolute;
+  right:10px;
+  top:calc(50% - 2.5px);
+  pointer-events:none;
+  z-index:3;
+}
+
+input:checked + label:before {
+  position:absolute;
+  right:0;
+  height: 40px;
+  width: 40px;
+  content: '';
+  background:transparent;
+}
+  </style>
+  <style>
+
+
+/* CSS */
+.button-31 {
+
+
+background-color:#282842  ;
+  border-radius: 4px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Farfetch Basis","Helvetica Neue",Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: auto;
+  margin-top: 10px;
+  max-width: none;
+  min-height: 44px;
+  min-width: 10px;
+
+  padding: 9px 20px 8px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 60%;
+  display: none;
+
+}
+
+.button-31:hover {
+  opacity: .75;
+}
+  </style>
+<body>
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class='bx bxl-c-plus-plus icon'></i>
+        <div class="logo_name">ExamGenerator</div>
+        <i class='bx bx-menu' id="btn" ></i>
+    </div>
+    <ul class="nav-list">
+      <!-- <li>
+          <i class='bx bx-search' ></i>
+         <input type="text" placeholder="Search...">
+         <span class="tooltip">Search</span>
+      </li> -->
+      <div class="optionsContainer">
+      <li>
+        <a href="#">
+          <i class='bx bxs-folder-plus'></i>
+          <span class="links_name">Math Branches</span>
+        </a>
+        
+        <div class="selectCourses" >
+          <p style="color: white;margin-bottom:10px"> Select the math branches : </p>
+        <select multiple="multiple" id="myMulti">       
+        </select>
+      </div>
+         <span class="tooltip">Math Branches</span>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bxs-file-plus'></i>
+          <span class="links_name">Branch lessons</span>
+        </a>
+        
+        <div class="selectCourses" >
+          <p style="color: white;margin-bottom:10px"> Select the Branch lessons : </p>
+        <select multiple="multiple" id="myMulti1">
+        </select>
+      </div>
+         <span class="tooltip">Branch lessons</span>
+      </li>
+      
+     <li>
+       <a href="#">
+         <i class='bx bxs-skull' ></i>
+         <span class="links_name">Difficulty</span>
+       </a>
+       <div class="selectCourses" >
+       <p style="color: white;margin-bottom:10px"> Select the exam difficulty : </p>
+       <div  class="select" tabindex="1">
+        <input class="selectopt" name="test" type="radio" id="opt1" checked>
+        <label style="background-color: #36AE7C;" for="opt1" class="option"><i class='bx bxs-skull' ></i>Easy</label>
+        <input class="selectopt" name="test" type="radio" id="opt2">
+        <label style="background-color:#F9D923 ;"  for="opt2" class="option"><i class='bx bxs-skull' ></i>Medium</label>
+        <input  class="selectopt" name="test" type="radio" id="opt3">
+        <label style="background-color:#EB5353 ;"  for="opt3" class="option"><i class='bx bxs-skull' ></i>Hard</label>
+      </div>
+    </div>
+       <span class="tooltip">Difficulty</span>
+     </li>
+     <li>
+
+      
+      
+        <p style="color: white;margin:30px 0"> <hr> </p>
+      <a style="margin-top:20px ;" href="#">
+        <i class='bx bxs-analyse' ></i> 
+        <span class="links_name">Generate the Exam</span>
+      </a>
+       <BUtton class="button-31"  onclick="getPDF()">Start</BUtton>
+       <span class="tooltip">Generate Exam</span>
+    </li>
+    </div>
+    
+    </ul>
+  </div>
+  <section class="home-section">
+      <!-- <div class="text">EXAM</div> -->
+      <iframe class="examContainer"  id="examContainer"> </iframe>
+  </section>
+  <script>
+  let sidebar = document.querySelector(".sidebar");
+  let closeBtn = document.querySelector("#btn");
+  let selectCourses = document.getElementsByClassName("selectCourses");
+  let generateExamBtn = document.getElementsByClassName("button-31");
+
+  closeBtn.addEventListener("click", ()=>{
+    sidebar.classList.toggle("open");
+    menuBtnChange();//calling the function(optional)
+  });
+
+  // searchBtn.addEventListener("click", ()=>{ // Sidebar open when you click on the search iocn
+  //   sidebar.classList.toggle("open");
+  //   menuBtnChange(); //calling the function(optional)
+  // });
+
+  // following are the code to change sidebar button(optional)
+  function menuBtnChange() {
+   if(sidebar.classList.contains("open")){
+     selectCourses[0].style.display="block"
+     selectCourses[1].style.display="block"
+     selectCourses[2].style.display="block"
+     generateExamBtn[0].style.display="block"
+     closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+   }else {
+     selectCourses[0].style.display="none"
+     selectCourses[1].style.display="none"
+     selectCourses[2].style.display="none"
+     generateExamBtn[0].style.display="none"
+     closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
+   }
+  }
+  </script>
+
+  <script>
+    //Varun Dewan 2019
+var $ = {
+   get: function(selector){ 
+      var ele = document.querySelectorAll(selector);
+      for(var i = 0; i < ele.length; i++){
+         this.init(ele[i]);
+      }
+      return ele;
+   },
+   template: function(html){
+      var template = document.createElement('div');
+      template.innerHTML = html.trim();
+      return this.init(template.childNodes[0]);
+   },
+   init: function(ele){
+      ele.on = function(event, func){ this.addEventListener(event, func); }
+      return ele;
+   }
+};
+
+//Build the plugin
+var drop = function(info){var o = {
+   options: info.options,
+   selected: info.selected || [],
+   preselected: info.preselected || [],
+   open: false,
+   html: {
+      select: $.get(info.selector)[0],
+      options: $.get(info.selector + ' option'),
+      parent: undefined,
+   },
+   init: function(){
+      //Setup Drop HTML
+      this.html.parent = $.get(info.selector)[0].parentNode
+      this.html.drop = $.template('<div class="drop" ></div>')
+      this.html.dropDisplay = $.template('<div class="drop-display dropDown">Display</div>')
+      this.html.dropOptions = $.template('<div class="drop-options">Options</div>')
+      this.html.dropScreen = $.template('<div class="drop-screen"></div>')
+      
+      this.html.parent.insertBefore(this.html.drop, this.html.select)
+      this.html.drop.appendChild(this.html.dropDisplay)
+      this.html.drop.appendChild(this.html.dropOptions)
+      this.html.drop.appendChild(this.html.dropScreen)
+      //Hide old select
+      this.html.drop.appendChild(this.html.select);
+      
+      //Core Events
+      var that = this;
+      this.html.dropDisplay.on('click', function(){ that.toggle() });
+      this.html.dropScreen.on('click', function(){ that.toggle() });
+      //Run Render
+      this.load(info.options)
+      this.preselect()
+      this.render();
+   },
+   toggle: function(){
+      this.html.drop.classList.toggle('open');
+   },
+   addOption: function(e, element){ 
+      var index = Number(element.dataset.index);
+      this.clearStates()
+      this.selected.push({
+         index: Number(index),
+         state: 'add',
+         removed: false
+      })
+      this.options[index].state = 'remove';
+      this.render()
+   },
+   removeOption: function(e, element){
+      e.stopPropagation();
+      this.clearStates()
+      var index = Number(element.dataset.index);
+      this.selected.forEach(function(select){
+         if(select.index == index && !select.removed){
+            select.removed = true
+            select.state = 'remove'
+         }
+      })
+      this.options[index].state = 'add'
+      this.render();
+   },
+   load: function(options){
+      this.options = options;
+      for(var i = 0; i < this.html.options.length; i++){
+         var option = this.html.options[i]
+         this.options[i] = {
+            html:  option.innerHTML,
+            value: option.value,
+            selected: option.selected,
+            state: ''
+         }
+      }
+   },
+   preselect: function(){
+      var that = this;
+      this.selected = [];
+      this.preselected.forEach(function(pre){
+         that.selected.push({
+            index: pre,
+            state: 'add',
+            removed: false
+         })
+         that.options[pre].state = 'remove';
+      })
+   },
+   render: function(){
+      this.renderDrop()
+      this.renderOptions()
+   },
+   renderDrop: function(){ 
+      var that = this;
+      var parentHTML = $.template('<div></div>')
+      this.selected.forEach(function(select, index){ 
+         var option = that.options[select.index];
+         var childHTML = $.template('<span class="item '+ select.state +'">'+ option.html +'</span>')
+         var childCloseHTML = $.template(
+            '<i class="material-icons btnclose" data-index="'+select.index+'">&#xe5c9;</i></span>')
+         childCloseHTML.on('click', function(e){ that.removeOption(e, this) })
+         childHTML.appendChild(childCloseHTML)
+         parentHTML.appendChild(childHTML)
+      })
+      this.html.dropDisplay.innerHTML = ''; 
+      this.html.dropDisplay.appendChild(parentHTML)
+   },
+   renderOptions: function(){  
+      var that = this;
+      var parentHTML = $.template('<div></div>')
+      this.options.forEach(function(option, index){
+         var childHTML = $.template(
+            '<a data-index="'+index+'" class="'+option.state+'">'+ option.html +'</a>')
+         childHTML.on('click', function(e){ that.addOption(e, this) })
+         parentHTML.appendChild(childHTML)
+      })
+      this.html.dropOptions.innerHTML = '';
+      this.html.dropOptions.appendChild(parentHTML)
+   },
+   clearStates: function(){
+      var that = this;
+      this.selected.forEach(function(select, index){ 
+         select.state = that.changeState(select.state)
+      })
+      this.options.forEach(function(option){ 
+         option.state = that.changeState(option.state)
+      })
+   },
+   changeState: function(state){
+      switch(state){
+         case 'remove':
+            return 'hide'
+         case 'hide':
+            return 'hide'
+         default:
+            return ''
+       }
+   },
+   isSelected: function(index){
+      var check = false
+      this.selected.forEach(function(select){ 
+         if(select.index == index && select.removed == false) check = true
+      })
+      return check
+   }
+}; o.init(); return o;}
+
+
+//Set up some data
+//---------------------------------------------------------
+
+
+
+  </script>
+
+  <!-- Back END  -->
+  <script>
+
+
+var selectMathBranch = new drop({
+  options:[],
+   selector:  '#myMulti',
+});
+
+var selectLessons = new drop({
+  options:[],
+    selector:  '#myMulti1',
+});
+
+// GETTING MATHBRANCHES FRON DB AND PUTTING IT ON THE DROP
+var mathBranchesArray=[]
+var lessonsArray=[]
+
+async function mathBranches() { 
+  console.log('hahahahha')
+  var mathBranchesData= await fetch('/router/mathbranches',{headers:{'content-Type':'application/json'}})
+  .then((res)=> res.json())
+  
+mathBranchesData.data.forEach(element => {
+  mathBranchesArray.push({html:element.name,value:element.name})
+});
+
+selectMathBranch.options=mathBranchesArray
+selectMathBranch.render()
+}
+
+
+mathBranches()
+
+//-----------------------------------------------------------
+function getSelectedOptions(drop) {
+  let selected = []
+  for (let i = 0; i < drop.selected.length; i++) {
+
+if (drop.selected[i].removed == false) {
+  
+  selected.push(drop.options[drop.selected[i].index].value)
+}
+}
+return selected
+}
+
+
+// GETTING THE SELECTED BRANCHES FROM  SELECT MATHBRANCHES 
+document.getElementsByClassName("dropDown")[1].addEventListener('click',async()=>{
+  lessonsArray=[]
+
+  let selectedMathBranches = getSelectedOptions(selectMathBranch)
+
+
+    const body =JSON.stringify(
+                {
+                "mathBranches":selectedMathBranches 
+            }
+        )
+    var lessons= await fetch('/router/lessons',{method:"POST",headers:{'content-Type':'application/json'},
+    body:body
+    
+  }).then((res)=>(res.json()))
+
+
+
+  
+  lessons.lessonsData.forEach(element => {
+  lessonsArray.push({html:element.lessons[0],value:element.lessons[0]})
+  lessonsArray.push({html:element.lessons[1],value:element.lessons[1]})
+});
+
+selectLessons.selected=[]
+selectLessons.options=lessonsArray
+selectLessons.render()
+
+})
+          
+ 
+// GETTING THE PDF FROM BACKEND
+function getPDF() {
+  generateExamBtn[0].innerText="loading..."
+  generateExamBtn[0].disabled=true
+  generateExamBtn[0].style.opacity='0.75'
+
+  let a =getSelectedOptions(selectLessons).join()
+  let b =getSelectedOptions(selectMathBranch).join()
+  document.getElementById('examContainer').setAttribute('src',`/router/generateExam/${a}/${b}`)
+
+
+
+  let difficulty = document.getElementsByName("test")
+
+  difficulty[0].checked? difficulty = "easy" :"" ;
+  difficulty[1].checked? difficulty = "medium" :"" ;
+  difficulty[2].checked? difficulty = "hard" :"" ;
+
+
+  // Data to be sent to the backend 
+  console.log(getSelectedOptions(selectLessons).join())
+  console.log(getSelectedOptions(selectMathBranch).join())
+  console.log(difficulty)
+
+  
+  setTimeout(() => {
+  generateExamBtn[0].innerText="start"  
+  generateExamBtn[0].style.opacity='1'
+  generateExamBtn[0].disabled=false
+  }, 4000);
+
+  
+  
+}
+    
+  </script>
+
+</body>
+</html>

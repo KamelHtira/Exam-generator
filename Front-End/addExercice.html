@@ -9,7 +9,8 @@
     <form action="" id="form">
         <input type="text" placeholder="path" id="path"> <br>
         <input type="text" placeholder="height" id="height"><br>
-        <input type="text" placeholder="category" id="category"><br>
+        <input type="text" placeholder="tags" id="tags"><br>
+        <input type="text" placeholder="difficulty" id="difficulty"><br>
         <button type="submit">send</button>
     </form>
 </body>
@@ -20,27 +21,6 @@ const form = document.getElementById('form')
 
 form.addEventListener('submit',addExerciceData);
 
-// async function check(){
-//     const body =JSON.stringify(
-//             {
-//             "token":localStorage.getItem('token'),
-//         }
-//         )
-//     const checkUser = await fetch('/jwtChecker',{
-//         method:'POST',
-//         headers:{'content-Type':'application/json'},
-//         body:body
-        
-//     }).then((res)=> res.json())
-    
-//     console.log(checkUser.status)
-//     if(checkUser.status=="error")
-//     {
-//         console.log("no access")
-//         window.location.href = "/login";
-//     }
-// }
-// check()
 
 
 async function addExerciceData(event){
@@ -48,15 +28,17 @@ async function addExerciceData(event){
     event.preventDefault()
     const path = document.getElementById('path').value
     const height  = document.getElementById('height').value
-    const category = document.getElementById('category').value.split(',')
-    console.log(typeof(category))
-    console.log(category)
+    const difficulty  = document.getElementById('difficulty').value
+    const tags = document.getElementById('tags').value.split(',')
+    console.log(typeof(tags))
+    console.log(tags)
     
     const body =JSON.stringify(
             {
             "path":path,
             "height":height,
-            "category":category
+            "tags":tags,
+            "difficulty":difficulty
         }
         )
     console.log(body)
@@ -69,7 +51,7 @@ async function addExerciceData(event){
         
     }).then((res)=> res.json())
     
-    alert(data._message)
+    alert(data._msg)
 
 
 }

@@ -1,5 +1,4 @@
 
-const jwt=require('jsonwebtoken')
 const dotenv = require('dotenv');
 const {verifyJWT,createJwtToken}= require('./functions/functions')
 dotenv.config();
@@ -14,9 +13,9 @@ async function middlewareYes(req,res,next)
         return next()
     }
     if (refreshToken.valid &&  accessToken.err =="jwt expired") {
-
+        
         const newAccessToken = await createJwtToken(refreshToken.data.data,'5s')
-        res.cookie('accessToken',newAccessToken,{maxAge:1000*60*15,
+        res.cookie('accessToken',newAccessToken,{maxAge:1000*60*60*24,
             httpOnly: true,
             domain:'localhost',
             path: '/',
@@ -32,9 +31,16 @@ async function middlewareYes(req,res,next)
 async function middlewareNo(req,res,next)
 {   
      const accessToken = await verifyJWT(req.cookies.accessToken)
-
-     if (accessToken.valid) {
-        return res.redirect('/router/addExerciceUI') 
+     const refreshToken = await verifyJWT(req.cookies.refreshToken)
+     if (accessToken.valid || (accessToken.err == "jwt expired" && refreshToken.valid)) {
+        const newAccessToken = await createJwtToken(refreshToken.data.data,'5s')
+        res.cookie('accessToken',newAccessToken,{maxAge:1000*60*60*24,
+            httpOnly: true,
+            domain:'localhost',
+            path: '/',
+            sameSite: 'strict',
+            secure: false,})
+        return res.redirect('/router/home') 
      }
 
     return next() // for now

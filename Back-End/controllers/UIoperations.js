@@ -23,5 +23,11 @@ function LoginPage (req, res, next) {
     res.send(html)
   }
 
+function homePage (req, res, next) {
+  
+    var html = fs.readFileSync('../Front-End/home.html', 'utf8')
+    res.send(html)
+  }
 
-  module.exports = { addExercicePage, deleteExercicePage, LoginPage } 
+
+  module.exports = { addExercicePage, deleteExercicePage, LoginPage ,homePage} 

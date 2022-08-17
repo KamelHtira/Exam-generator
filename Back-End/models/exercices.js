@@ -10,10 +10,19 @@ const exerciceSchema = mongoose.Schema(
             type:Number,
             required:true
         },
-        category: {
+        tags: {
             type:[],
             required:true
+        },
+        difficulty:{
+            type:Number,
+            required:true
         }
+       
     }
 )
-module.exports = Exercice = mongoose.model('exercice',exerciceSchema)
+
+
+Exercice = mongoose.model('exercice',exerciceSchema)
+
+module.exports = Exercice

@@ -5,6 +5,7 @@ const pdfService = require('../services/pdf-service');
 
 // pdf service route
 async function generateExam (req, res, next) {
+
     let testExercicesData  = await Exercice.find({});
     let ExamData ={
     universityName:"Institus superieur des arts de multimedias",
@@ -15,8 +16,10 @@ async function generateExam (req, res, next) {
   }
     const stream = res.writeHead(200, {
       'Content-Type': 'application/pdf',
-      'Content-Disposition': `attachment;filename=invoice.pdf`,
+      'Content-Disposition': `inline;filename=exam.pdf`,
     });
+
+    console.log(req.params)
     pdfService.buildPDF(
       (chunk) => stream.write(chunk),
       

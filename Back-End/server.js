@@ -5,7 +5,7 @@ const app = express();
 const cookies = require('cookie-parser')
 const router=require('./routes/Routes')
 const authRouter=require('./routes/AuthRoutes')
-
+const Exercice = require('./models/exercices')
 app.use(cookies())
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -24,7 +24,6 @@ mongoose.connect('mongodb+srv://kamel:kamel@cluster0.wejj0ir.mongodb.net/?retryW
     console.log('database is connected..');
   }
 }) 
-
 
 
 //running server

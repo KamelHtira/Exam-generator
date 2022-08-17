@@ -30,6 +30,7 @@ const  buildPDF=async (dataCallback, endCallback,ExamData)=> {
   let Exs=[]
   var pageH=200
   let pN=1
+  
   Exam.fontSize(12)
   for( i=0;i<ran(5,3);i++){
     console.log("I am i : "+i)
