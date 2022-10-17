@@ -36,13 +36,13 @@ async function verifyLogin (req, res){
       
        res.cookie('accessToken',accessToken,{maxAge:1000*60*15,
         httpOnly: true,
-        domain:'https://exam-generator.onrender.com',
+        domain:'exam-generator.onrender.com',
         path: '/',
         sameSite: 'strict',
         secure: false,})
       res.cookie('refreshToken',refreshToken,{maxAge:1000*60*60*24,
         httpOnly: true,
-        domain:'https://exam-generator.onrender.com',
+        domain:'exam-generator.onrender.com',
         path: '/',
         sameSite: 'strict',
         secure: false,})
