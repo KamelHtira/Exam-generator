@@ -12,7 +12,9 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/router", router);
 app.use("/auth", authRouter);
-
+app.get('/',(req,res)=>{
+  res.send('exam-generator service is working..')
+})
 
 // connecting server to mongoDB Atlas :
 mongoose.connect('mongodb+srv://kamel:kamel@cluster0.wejj0ir.mongodb.net/?retryWrites=true&w=majority' , (err,done)=>{
