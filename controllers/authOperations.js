@@ -3,7 +3,7 @@ const Users = require('../models/Users');
 const bcrypt=require('bcryptjs')
 const jwt=require('jsonwebtoken')
 const dotenv = require('dotenv');
-const {verifyJWT,createJwtToken}= require('../functions/functions')
+const {verifyJWT,createJwtToken}= require('../functions/tools')
 dotenv.config();
 JWT_SECRET_KEY=process.env.JWT_SECRET_KEY
 

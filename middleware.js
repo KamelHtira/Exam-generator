@@ -1,6 +1,6 @@
 
 const dotenv = require('dotenv');
-const {verifyJWT,createJwtToken}= require('./functions/functions.js')
+const {verifyJWT,createJwtToken}= require('./functions/tools')
 dotenv.config();
 JWT_SECRET_KEY=process.env.JWT_SECRET_KEY
 
